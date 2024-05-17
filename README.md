@@ -2,7 +2,7 @@
 
 This is the documentation for the comfyUI every nodes.
 
-![example1]('examples/2.png')
+![example1](examples/2.png)
 
 ## installation
 
