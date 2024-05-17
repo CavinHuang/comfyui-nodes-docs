@@ -21,7 +21,7 @@ This is the documentation for the comfyUI every nodes.
 ### add a new node docs
 
 - Create a Markdown file named after the `node type` in the 'docs' folder, such as `CLIPMergeSimple.md`
-- Add the following structure to the file, please refer to specific examples(CLIPMergeSimple.md)[docs/CLIPMergeSimple.md] for details.:
+- Add the following structure to the file, please refer to specific examples[CLIPMergeSimple.md](docs/CLIPMergeSimple.md) for details.:
 
 <pre><code>
 # Documentation
