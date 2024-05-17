@@ -100,7 +100,7 @@ const showNodeDocs = async function(node) {
 
   const buttonClose = document.createElement('button')
   /**
-   * background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
     padding: 0;
     border: none;
     cursor: pointer;
