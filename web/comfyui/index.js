@@ -2,6 +2,7 @@ import { app } from "../../scripts/app.js";
 import { marked } from './marked.js'
 
 console.log('app', app)
+
 /**
  * 1: {
  * x: [0,1]
@@ -65,17 +66,25 @@ const hideActiveDocs = function() {
   }
 }
 
+/**
+ * 显示节点文档
+ * @param {*} node
+ * @returns
+ */
 const showNodeDocs = async function(node) {
   const ele = nodeDocsEleMap.get(node.id)
+  const [nLeft, nTop, nWidth, nHeight] = node.getBounding()
   if(ele) {
     ele.style.display = 'block'
+    // 更新位置
+    // ele.style.left = (nLeft + nWidth + 20) + 'px'
+    activeDocsEle = ele
     return
   }
   const divWrap = document.createElement('div')
   divWrap.style.position = 'absolute'
 
-  const [nLeft, nTop, nWidth, nHeight] = node.getBounding()
-  divWrap.style.left = (nLeft + nWidth + 20) + 'px'
+  divWrap.style.left = 'calc(50% - 400px)'
   divWrap.style.top = '20px'
   divWrap.style.width = '800px'
   divWrap.style.height = window.innerHeight - 100 + 'px'
@@ -110,7 +119,7 @@ const showNodeDocs = async function(node) {
   }
 
   const divButtonWrap = document.createElement('div')
-  
+
   divButtonWrap.style.display = 'flex'
   divButtonWrap.style.justifyContent = 'flex-end'
   divButtonWrap.style.height = '32px'
@@ -157,29 +166,92 @@ const throttle = function(fn, delay) {
   }
 }
 
+
+// const wheel = LGraphCanvas.prototype.processMouseWheel
+// console.log('🚀 ~ setup ~ wheel:', wheel)
+// LGraphCanvas.prototype.processMouseWheel = function(e) {
+//   console.log('🚀 ~ cacheNodePositonMap.forEach ~ node:')
+//   wheel.apply(this, arguments)
+//   cacheNodePositonMap.forEach((value, key) => {
+//     const node = app.graph.getNodeById(key)
+//     if(node) {
+//       const [nLeft, nTop, nWidth, nHeight] = node.getBounding()
+//       // 根据最新的node位置更新图标的位置信息
+//       cacheNodePositonMap.set(node.id, {
+//         x: [nLeft + nWidth - 22, nLeft + nWidth],
+//         y: [nTop , nTop + 22]
+//       })
+//     }
+//   })
+// }
+
+const processMouseDown = LGraphCanvas.prototype.processMouseDown
+LGraphCanvas.prototype.processMouseDown = function(e) {
+  console.log('🚀 ~ arguments:', arguments)
+  processMouseDown.apply(this, arguments)
+  const { canvasX, canvasY } = e
+  const nodes = app.graph._nodes
+  let isClickDoc = false
+  for(let i = 0; i < nodes.length; i++) {
+    const node = nodes[i]
+    const [nL, nT, nW, nH] = node.getBounding()
+    const iconX = nL + nW - 22
+    const iconY = nT
+    const iconX1 = nL + nW
+    const iconY1 = nT + 22
+
+    if(canvasX >= iconX && canvasX <= iconX1 && canvasY >= iconY && canvasY <= iconY1) {
+      isClickDoc = true
+      break
+    }
+  }
+
+  if(!isClickDoc) {
+    hideActiveDocs()
+  }
+}
+
 app.registerExtension({
   name: 'Leo.NodeDocs',
   setup() {
-    app.canvasEl.addEventListener('click', function(e) {
-      console.log('🚀 ~ app.canvasEl.addEventListener ~ e', e)
-      // 排除点击文档区域
-      const { clientX, clientY } = e
-      console.log("🚀 ~ app.canvasEl.addEventListener ~ clientX:", clientX, clientY)
-      let isClickDoc = false
-      cacheNodePositonMap.forEach((value, key) => {
-        const {x, y} = value
-        console.log("🚀 ~ app.canvasEl.addEventListener ~ x, y", x, y)
-        console.log(clientX < x[0], clientX > x[1], clientY < y[0], clientY > y[1]);
-        // 排除文档图标区域
-        if(clientX >= x[0] && clientX <= x[1] && clientY >= y[0] && clientY <= y[1]) {
-          isClickDoc = true
-          return
-        }
-      })
-      if(!isClickDoc) {
-        hideActiveDocs()
-      }
-    }, false)
+    console.log('🚀 ~ setup ~ app', app)
+    // app.canvasEl.addEventListener('click', function(e) {
+    //   console.log('🚀 ~ app.canvasEl.addEventListener ~ e:', e)
+    //   // 排除点击文档区域
+    //   const { clientX, clientY } = e
+    //   let isClickDoc = false
+    //   // cacheNodePositonMap.forEach((value, key) => {
+    //   //   const {x, y} = value
+    //   //   // 排除文档图标区域
+    //   //   if(clientX >= x[0] && clientX <= x[1] && clientY >= y[0] && clientY <= y[1]) {
+    //   //     isClickDoc = true
+    //   //     return
+    //   //   }
+    //   // })
+    //   //获取所有的节点，计算出节点上的文档图标的位置
+    //   const nodes = app.graph._nodes
+    //   // console.log(clientX, clientY)
+    //   for(let i = 0; i < nodes.length; i++) {
+    //     const node = nodes[i]
+    //     const [nL, nT, nW, nH] = node.getBounding()
+    //     // console.log(nL, nT, nW, nH)
+    //     const iconX = nL + nW - 22
+    //     const iconY = nT
+    //     const iconX1 = nL + nW
+    //     const iconY1 = nT + 22
+
+    //     // console.log(clientX, clientY, iconX, iconY, iconX1, iconY1)
+    //     if(clientX >= iconX && clientX <= iconX1 && clientY >= iconY && clientY <= iconY1) {
+    //       isClickDoc = true
+    //       break
+    //     }
+    //   }
+
+    //   if(!isClickDoc) {
+    //     console.log('关闭文档')
+    //     hideActiveDocs()
+    //   }
+    // }, false)
 
     // window resize重新计算所有文档的位置
     window.addEventListener('resize', throttle(() => {
@@ -194,6 +266,18 @@ app.registerExtension({
         }
       })
     }, 1000))
+
+    // 画布缩放时更新图标位置
+    // app.canvasEl.addEventListener('wheel', () => {
+      // cacheNodePositonMap.forEach((value, key) => {
+      //   const node = app.graph.getNodeById(key)
+      //   if(node) {
+      //     console.log('🚀 ~ app.canvasEl.addEventListener ~ node', node)
+      //   }
+      // })
+    // }, false)
+
+
 
   },
   nodeCreated: function(node, app) {
@@ -218,22 +302,33 @@ app.registerExtension({
       oDb?.apply(node, arguments)
       const { canvasX, canvasY } = e
 
-      const nodePos = cacheNodePositonMap.get(node.id)
-      console.log("🚀 ~ loadedGraphNode ~ nodePos:", nodePos)
-      console.log("🚀 ~ loadedGraphNode ~ nodePos:", e)
-      console.log("🚀 ~ loadedGraphNode ~ nodePos:", node.getBounding())
-      if(nodePos) {
-        const {x, y} = nodePos
-        console.log(canvasX, canvasY, x, y)
-        if(canvasX >= x[0] && canvasX <= x[1] && canvasY >= y[0] && canvasY <= y[1]) {
-          console.log('🚀 ~ node.onMouseDown ~ nodePos11111', nodePos)
-          showNodeDocs(node)
-          // app.showNodeDocs(node)
-          e.preventDefault()
-          e.stopPropagation()
-          return false
-        }
+      // 通过node的位置信息判断是否点击了文档图标
+      const [nLeft, nTop, nWidth, nHeight] = node.getBounding()
+      const iconX = nLeft + nWidth - 22
+      const iconY = nTop
+      const iconX1 = nLeft + nWidth
+      const iconY1 = nTop + 22
+      console.log(canvasX, canvasY, iconX, iconY, iconX1, iconY1)
+      if(canvasX >= iconX && canvasX <= iconX1 && canvasY >= iconY && canvasY <= iconY1) {
+        console.log('打开文档')
+        showNodeDocs(node)
+        e.preventDefault()
+        e.stopPropagation()
+        return false
       }
+      // const nodePos = cacheNodePositonMap.get(node.id)
+      // if(nodePos) {
+      //   const {x, y} = nodePos
+      //   // 计算图标的位置
+      //   console.log(canvasX, canvasY, x, y)
+      //   if(canvasX >= x[0] && canvasX <= x[1] && canvasY >= y[0] && canvasY <= y[1]) {
+      //     showNodeDocs(node)
+      //     // app.showNodeDocs(node)
+      //     e.preventDefault()
+      //     e.stopPropagation()
+      //     return false
+      //   }
+      // }
     }
 	},
 });
