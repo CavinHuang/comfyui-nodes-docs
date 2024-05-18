@@ -215,44 +215,6 @@ app.registerExtension({
   name: 'Leo.NodeDocs',
   setup() {
     console.log('🚀 ~ setup ~ app', app)
-    // app.canvasEl.addEventListener('click', function(e) {
-    //   console.log('🚀 ~ app.canvasEl.addEventListener ~ e:', e)
-    //   // 排除点击文档区域
-    //   const { clientX, clientY } = e
-    //   let isClickDoc = false
-    //   // cacheNodePositonMap.forEach((value, key) => {
-    //   //   const {x, y} = value
-    //   //   // 排除文档图标区域
-    //   //   if(clientX >= x[0] && clientX <= x[1] && clientY >= y[0] && clientY <= y[1]) {
-    //   //     isClickDoc = true
-    //   //     return
-    //   //   }
-    //   // })
-    //   //获取所有的节点，计算出节点上的文档图标的位置
-    //   const nodes = app.graph._nodes
-    //   // console.log(clientX, clientY)
-    //   for(let i = 0; i < nodes.length; i++) {
-    //     const node = nodes[i]
-    //     const [nL, nT, nW, nH] = node.getBounding()
-    //     // console.log(nL, nT, nW, nH)
-    //     const iconX = nL + nW - 22
-    //     const iconY = nT
-    //     const iconX1 = nL + nW
-    //     const iconY1 = nT + 22
-
-    //     // console.log(clientX, clientY, iconX, iconY, iconX1, iconY1)
-    //     if(clientX >= iconX && clientX <= iconX1 && clientY >= iconY && clientY <= iconY1) {
-    //       isClickDoc = true
-    //       break
-    //     }
-    //   }
-
-    //   if(!isClickDoc) {
-    //     console.log('关闭文档')
-    //     hideActiveDocs()
-    //   }
-    // }, false)
-
     // window resize重新计算所有文档的位置
     window.addEventListener('resize', throttle(() => {
       cacheNodePositonMap.forEach((value, key) => {
@@ -266,19 +228,6 @@ app.registerExtension({
         }
       })
     }, 1000))
-
-    // 画布缩放时更新图标位置
-    // app.canvasEl.addEventListener('wheel', () => {
-      // cacheNodePositonMap.forEach((value, key) => {
-      //   const node = app.graph.getNodeById(key)
-      //   if(node) {
-      //     console.log('🚀 ~ app.canvasEl.addEventListener ~ node', node)
-      //   }
-      // })
-    // }, false)
-
-
-
   },
   nodeCreated: function(node, app) {
     if(!node.doc_enabled) {
@@ -290,6 +239,28 @@ app.registerExtension({
       };
       node.doc_enabled = true;
       console.log('=======', node)
+
+      console.log(1, node)
+      const oDb = node.onMouseDown
+      node.onMouseDown = function(e) {
+        oDb?.apply(node, arguments)
+        const { canvasX, canvasY } = e
+
+        // 通过node的位置信息判断是否点击了文档图标
+        const [nLeft, nTop, nWidth, nHeight] = node.getBounding()
+        const iconX = nLeft + nWidth - 22
+        const iconY = nTop
+        const iconX1 = nLeft + nWidth
+        const iconY1 = nTop + 22
+        console.log(canvasX, canvasY, iconX, iconY, iconX1, iconY1)
+        if(canvasX >= iconX && canvasX <= iconX1 && canvasY >= iconY && canvasY <= iconY1) {
+          console.log('打开文档')
+          showNodeDocs(node)
+          e.preventDefault()
+          e.stopPropagation()
+          return false
+        }
+      }
     }
   },
   loadedGraphNode(node, app) {
@@ -297,38 +268,5 @@ app.registerExtension({
 			const orig = node.onDrawForeground;
 			node.onDrawForeground = function (ctx) { drawDocIcon(node, orig, arguments) };
 		}
-    const oDb = node.onMouseDown
-    node.onMouseDown = function(e) {
-      oDb?.apply(node, arguments)
-      const { canvasX, canvasY } = e
-
-      // 通过node的位置信息判断是否点击了文档图标
-      const [nLeft, nTop, nWidth, nHeight] = node.getBounding()
-      const iconX = nLeft + nWidth - 22
-      const iconY = nTop
-      const iconX1 = nLeft + nWidth
-      const iconY1 = nTop + 22
-      console.log(canvasX, canvasY, iconX, iconY, iconX1, iconY1)
-      if(canvasX >= iconX && canvasX <= iconX1 && canvasY >= iconY && canvasY <= iconY1) {
-        console.log('打开文档')
-        showNodeDocs(node)
-        e.preventDefault()
-        e.stopPropagation()
-        return false
-      }
-      // const nodePos = cacheNodePositonMap.get(node.id)
-      // if(nodePos) {
-      //   const {x, y} = nodePos
-      //   // 计算图标的位置
-      //   console.log(canvasX, canvasY, x, y)
-      //   if(canvasX >= x[0] && canvasX <= x[1] && canvasY >= y[0] && canvasY <= y[1]) {
-      //     showNodeDocs(node)
-      //     // app.showNodeDocs(node)
-      //     e.preventDefault()
-      //     e.stopPropagation()
-      //     return false
-      //   }
-      // }
-    }
 	},
 });

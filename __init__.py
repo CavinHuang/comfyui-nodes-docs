@@ -3,8 +3,9 @@ from server import PromptServer
 from aiohttp import web
 
 WEB_DIRECTORY = "./web/comfyui"
+NODE_CLASS_MAPPINGS = {}
 
-__all__ = ['WEB_DIRECTORY']
+__all__ = ['WEB_DIRECTORY', 'NODE_CLASS_MAPPINGS']
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -24,3 +25,7 @@ async def fetch_customnode_node_info(request):
       return web.json_response({"content": ""})
   except Exception as e:
     return web.json_response({"content": ""})
+
+MAGENTA = '\033[95m'
+RESET = '\033[0m'
+print(f"{MAGENTA}[comfyui-nodes-docs]{RESET}Loaded comfyui-nodes-docs plugin")
