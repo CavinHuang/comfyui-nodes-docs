@@ -166,25 +166,6 @@ const throttle = function(fn, delay) {
   }
 }
 
-
-// const wheel = LGraphCanvas.prototype.processMouseWheel
-// console.log('🚀 ~ setup ~ wheel:', wheel)
-// LGraphCanvas.prototype.processMouseWheel = function(e) {
-//   console.log('🚀 ~ cacheNodePositonMap.forEach ~ node:')
-//   wheel.apply(this, arguments)
-//   cacheNodePositonMap.forEach((value, key) => {
-//     const node = app.graph.getNodeById(key)
-//     if(node) {
-//       const [nLeft, nTop, nWidth, nHeight] = node.getBounding()
-//       // 根据最新的node位置更新图标的位置信息
-//       cacheNodePositonMap.set(node.id, {
-//         x: [nLeft + nWidth - 22, nLeft + nWidth],
-//         y: [nTop , nTop + 22]
-//       })
-//     }
-//   })
-// }
-
 const processMouseDown = LGraphCanvas.prototype.processMouseDown
 LGraphCanvas.prototype.processMouseDown = function(e) {
   console.log('🚀 ~ arguments:', arguments)
