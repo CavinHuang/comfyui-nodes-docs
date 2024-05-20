@@ -20,6 +20,8 @@ search `comfyui-nodes-docs` in the comfyUI manager and install it.
 
 - Restart ComfyUI
 
+## [Node Lists](nodesList.md)
+
 ## Development
 
 ### Two aspects:

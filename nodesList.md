@@ -1,12 +1,12 @@
 | Node | Description | Link  | 
 | --- | --- | --- | 
-| AB SamplerCustom (experimental) | AB SamplerCustom (experimental) | [AB SamplerCustom (experimental)]("docs/AB SamplerCustom %28experimental%29.md") | 
+| AB SamplerCustom (experimental) | AB SamplerCustom (experimental) | [AB SamplerCustom (experimental)]("docs/AB%20SamplerCustom%20%28experimental%29.md") | 
 | AddNoise | AddNoise | [AddNoise]("docs/AddNoise.md") | 
 | AlignYourStepsScheduler | AlignYourStepsScheduler | [AlignYourStepsScheduler]("docs/AlignYourStepsScheduler.md") | 
 | BaseModel_Loader_local | BaseModel_Loader_local | [BaseModel_Loader_local]("docs/BaseModel_Loader_local.md") | 
 | BasicGuider | BasicGuider | [BasicGuider]("docs/BasicGuider.md") | 
 | BasicScheduler | BasicScheduler | [BasicScheduler]("docs/BasicScheduler.md") | 
-| Blend Latents (PPF Noise) | Blend Latents (PPF Noise) | [Blend Latents (PPF Noise)]("docs/Blend Latents %28PPF Noise%29.md") | 
+| Blend Latents (PPF Noise) | Blend Latents (PPF Noise) | [Blend Latents (PPF Noise)]("docs/Blend%20Latents%20%28PPF%20Noise%29.md") | 
 | CFGGuider | CFGGuider | [CFGGuider]("docs/CFGGuider.md") | 
 | CLIPAttentionMultiply | CLIPAttentionMultiply | [CLIPAttentionMultiply]("docs/CLIPAttentionMultiply.md") | 
 | CLIPLoader | CLIPLoader | [CLIPLoader]("docs/CLIPLoader.md") | 
@@ -41,8 +41,8 @@
 | ControlNetLoader | ControlNetLoader | [ControlNetLoader]("docs/ControlNetLoader.md") | 
 | CreateRequestMetadata | CreateRequestMetadata | [CreateRequestMetadata]("docs/CreateRequestMetadata.md") | 
 | CropMask | CropMask | [CropMask]("docs/CropMask.md") | 
-| Cross-Hatch Power Fractal (PPF Noise) | Cross-Hatch Power Fractal (PPF Noise) | [Cross-Hatch Power Fractal (PPF Noise)]("docs/Cross-Hatch Power Fractal %28PPF Noise%29.md") | 
-| Cross-Hatch Power Fractal Settings (PPF Noise) | Cross-Hatch Power Fractal Settings (PPF Noise) | [Cross-Hatch Power Fractal Settings (PPF Noise)]("docs/Cross-Hatch Power Fractal Settings %28PPF Noise%29.md") | 
+| Cross-Hatch Power Fractal (PPF Noise) | Cross-Hatch Power Fractal (PPF Noise) | [Cross-Hatch Power Fractal (PPF Noise)]("docs/Cross-Hatch%20Power%20Fractal%20%28PPF%20Noise%29.md") | 
+| Cross-Hatch Power Fractal Settings (PPF Noise) | Cross-Hatch Power Fractal Settings (PPF Noise) | [Cross-Hatch Power Fractal Settings (PPF Noise)]("docs/Cross-Hatch%20Power%20Fractal%20Settings%20%28PPF%20Noise%29.md") | 
 | DiffControlNetLoader | DiffControlNetLoader | [DiffControlNetLoader]("docs/DiffControlNetLoader.md") | 
 | DifferentialDiffusion | DifferentialDiffusion | [DifferentialDiffusion]("docs/DifferentialDiffusion.md") | 
 | DiffusersLoader | DiffusersLoader | [DiffusersLoader]("docs/DiffusersLoader.md") | 
@@ -80,7 +80,7 @@
 | ImageSharpen | ImageSharpen | [ImageSharpen]("docs/ImageSharpen.md") | 
 | ImageToMask | ImageToMask | [ImageToMask]("docs/ImageToMask.md") | 
 | ImageUpscaleWithModel | ImageUpscaleWithModel | [ImageUpscaleWithModel]("docs/ImageUpscaleWithModel.md") | 
-| Images as Latents (PPF Noise) | Images as Latents (PPF Noise) | [Images as Latents (PPF Noise)]("docs/Images as Latents %28PPF Noise%29.md") | 
+| Images as Latents (PPF Noise) | Images as Latents (PPF Noise) | [Images as Latents (PPF Noise)]("docs/Images%20as%20Latents%20%28PPF%20Noise%29.md") | 
 | InpaintModelConditioning | InpaintModelConditioning | [InpaintModelConditioning]("docs/InpaintModelConditioning.md") | 
 | InstructPixToPixConditioning | InstructPixToPixConditioning | [InstructPixToPixConditioning]("docs/InstructPixToPixConditioning.md") | 
 | InvertMask | InvertMask | [InvertMask]("docs/InvertMask.md") | 
@@ -90,7 +90,7 @@
 | KSamplerSelect | KSamplerSelect | [KSamplerSelect]("docs/KSamplerSelect.md") | 
 | KarrasScheduler | KarrasScheduler | [KarrasScheduler]("docs/KarrasScheduler.md") | 
 | LCMScheduler | LCMScheduler | [LCMScheduler]("docs/LCMScheduler.md") | 
-| Latent Adjustment (PPF Noise) | Latent Adjustment (PPF Noise) | [Latent Adjustment (PPF Noise)]("docs/Latent Adjustment %28PPF Noise%29.md") | 
+| Latent Adjustment (PPF Noise) | Latent Adjustment (PPF Noise) | [Latent Adjustment (PPF Noise)]("docs/Latent%20Adjustment%20%28PPF%20Noise%29.md") | 
 | LatentAdd | LatentAdd | [LatentAdd]("docs/LatentAdd.md") | 
 | LatentBatch | LatentBatch | [LatentBatch]("docs/LatentBatch.md") | 
 | LatentBatchSeedBehavior | LatentBatchSeedBehavior | [LatentBatchSeedBehavior]("docs/LatentBatchSeedBehavior.md") | 
@@ -106,9 +106,9 @@
 | LatentSubtract | LatentSubtract | [LatentSubtract]("docs/LatentSubtract.md") | 
 | LatentUpscale | LatentUpscale | [LatentUpscale]("docs/LatentUpscale.md") | 
 | LatentUpscaleBy | LatentUpscaleBy | [LatentUpscaleBy]("docs/LatentUpscaleBy.md") | 
-| Latents to CPU (PPF Noise) | Latents to CPU (PPF Noise) | [Latents to CPU (PPF Noise)]("docs/Latents to CPU %28PPF Noise%29.md") | 
-| Linear Cross-Hatch Power Fractal (PPF Noise) | Linear Cross-Hatch Power Fractal (PPF Noise) | [Linear Cross-Hatch Power Fractal (PPF Noise)]("docs/Linear Cross-Hatch Power Fractal %28PPF Noise%29.md") | 
-| Load 64 Encoded Image | Load 64 Encoded Image | [Load 64 Encoded Image]("docs/Load 64 Encoded Image.md") | 
+| Latents to CPU (PPF Noise) | Latents to CPU (PPF Noise) | [Latents to CPU (PPF Noise)]("docs/Latents%20to%20CPU%20%28PPF%20Noise%29.md") | 
+| Linear Cross-Hatch Power Fractal (PPF Noise) | Linear Cross-Hatch Power Fractal (PPF Noise) | [Linear Cross-Hatch Power Fractal (PPF Noise)]("docs/Linear%20Cross-Hatch%20Power%20Fractal%20%28PPF%20Noise%29.md") | 
+| Load 64 Encoded Image | Load 64 Encoded Image | [Load 64 Encoded Image]("docs/Load%2064%20Encoded%20Image.md") | 
 | LoadImage | LoadImage | [LoadImage]("docs/LoadImage.md") | 
 | LoadImageMask | LoadImageMask | [LoadImageMask]("docs/LoadImageMask.md") | 
 | LoadLatent | LoadLatent | [LoadLatent]("docs/LoadLatent.md") | 
@@ -131,8 +131,8 @@
 | Morphology | Morphology | [Morphology]("docs/Morphology.md") | 
 | NEW_PhotoMaker_Generation | NEW_PhotoMaker_Generation | [NEW_PhotoMaker_Generation]("docs/NEW_PhotoMaker_Generation.md") | 
 | PatchModelAddDownscale | PatchModelAddDownscale | [PatchModelAddDownscale]("docs/PatchModelAddDownscale.md") | 
-| Perlin Power Fractal Latent (PPF Noise) | Perlin Power Fractal Latent (PPF Noise) | [Perlin Power Fractal Latent (PPF Noise)]("docs/Perlin Power Fractal Latent %28PPF Noise%29.md") | 
-| Perlin Power Fractal Settings (PPF Noise) | Perlin Power Fractal Settings (PPF Noise) | [Perlin Power Fractal Settings (PPF Noise)]("docs/Perlin Power Fractal Settings %28PPF Noise%29.md") | 
+| Perlin Power Fractal Latent (PPF Noise) | Perlin Power Fractal Latent (PPF Noise) | [Perlin Power Fractal Latent (PPF Noise)]("docs/Perlin%20Power%20Fractal%20Latent%20%28PPF%20Noise%29.md") | 
+| Perlin Power Fractal Settings (PPF Noise) | Perlin Power Fractal Settings (PPF Noise) | [Perlin Power Fractal Settings (PPF Noise)]("docs/Perlin%20Power%20Fractal%20Settings%20%28PPF%20Noise%29.md") | 
 | PerpNeg | PerpNeg | [PerpNeg]("docs/PerpNeg.md") | 
 | PerpNegGuider | PerpNegGuider | [PerpNegGuider]("docs/PerpNegGuider.md") | 
 | PerturbedAttentionGuidance | PerturbedAttentionGuidance | [PerturbedAttentionGuidance]("docs/PerturbedAttentionGuidance.md") | 
@@ -141,9 +141,9 @@
 | PhotoMakerLoader | PhotoMakerLoader | [PhotoMakerLoader]("docs/PhotoMakerLoader.md") | 
 | PolyexponentialScheduler | PolyexponentialScheduler | [PolyexponentialScheduler]("docs/PolyexponentialScheduler.md") | 
 | PorterDuffImageComposite | PorterDuffImageComposite | [PorterDuffImageComposite]("docs/PorterDuffImageComposite.md") | 
-| Power KSampler Advanced (PPF Noise) | Power KSampler Advanced (PPF Noise) | [Power KSampler Advanced (PPF Noise)]("docs/Power KSampler Advanced %28PPF Noise%29.md") | 
-| Power-Law Noise (PPF Noise) | Power-Law Noise (PPF Noise) | [Power-Law Noise (PPF Noise)]("docs/Power-Law Noise %28PPF Noise%29.md") | 
-| Preview Chooser Fabric | Preview Chooser Fabric | [Preview Chooser Fabric]("docs/Preview Chooser Fabric.md") | 
+| Power KSampler Advanced (PPF Noise) | Power KSampler Advanced (PPF Noise) | [Power KSampler Advanced (PPF Noise)]("docs/Power%20KSampler%20Advanced%20%28PPF%20Noise%29.md") | 
+| Power-Law Noise (PPF Noise) | Power-Law Noise (PPF Noise) | [Power-Law Noise (PPF Noise)]("docs/Power-Law%20Noise%20%28PPF%20Noise%29.md") | 
+| Preview Chooser Fabric | Preview Chooser Fabric | [Preview Chooser Fabric]("docs/Preview%20Chooser%20Fabric.md") | 
 | PreviewImage | PreviewImage | [PreviewImage]("docs/PreviewImage.md") | 
 | Prompt_Styler | Prompt_Styler | [Prompt_Styler]("docs/Prompt_Styler.md") | 
 | RandomNoise | RandomNoise | [RandomNoise]("docs/RandomNoise.md") | 
@@ -156,7 +156,7 @@
 | RequestInputs | RequestInputs | [RequestInputs]("docs/RequestInputs.md") | 
 | RescaleCFG | RescaleCFG | [RescaleCFG]("docs/RescaleCFG.md") | 
 | SDTurboScheduler | SDTurboScheduler | [SDTurboScheduler]("docs/SDTurboScheduler.md") | 
-| SDXL Empty Latent Image | SDXL Empty Latent Image | [SDXL Empty Latent Image]("docs/SDXL Empty Latent Image.md") | 
+| SDXL Empty Latent Image | SDXL Empty Latent Image | [SDXL Empty Latent Image]("docs/SDXL%20Empty%20Latent%20Image.md") | 
 | SDXLPromptStyler | SDXLPromptStyler | [SDXLPromptStyler]("docs/SDXLPromptStyler.md") | 
 | SDXLPromptStylerAdvanced | SDXLPromptStylerAdvanced | [SDXLPromptStylerAdvanced]("docs/SDXLPromptStylerAdvanced.md") | 
 | SD_4XUpscale_Conditioning | SD_4XUpscale_Conditioning | [SD_4XUpscale_Conditioning]("docs/SD_4XUpscale_Conditioning.md") | 
@@ -173,7 +173,7 @@
 | SamplerLCMCycle | SamplerLCMCycle | [SamplerLCMCycle]("docs/SamplerLCMCycle.md") | 
 | SamplerLCMUpscale | SamplerLCMUpscale | [SamplerLCMUpscale]("docs/SamplerLCMUpscale.md") | 
 | SamplerLMS | SamplerLMS | [SamplerLMS]("docs/SamplerLMS.md") | 
-| Save Image (api) | Save Image (api) | [Save Image (api)]("docs/Save Image %28api%29.md") | 
+| Save Image (api) | Save Image (api) | [Save Image (api)]("docs/Save%20Image%20%28api%29.md") | 
 | SaveAnimatedPNG | SaveAnimatedPNG | [SaveAnimatedPNG]("docs/SaveAnimatedPNG.md") | 
 | SaveAnimatedWEBP | SaveAnimatedWEBP | [SaveAnimatedWEBP]("docs/SaveAnimatedWEBP.md") | 
 | SaveImage | SaveImage | [SaveImage]("docs/SaveImage.md") | 
@@ -193,8 +193,8 @@
 | StableCascade_SuperResolutionControlnet | StableCascade_SuperResolutionControlnet | [StableCascade_SuperResolutionControlnet]("docs/StableCascade_SuperResolutionControlnet.md") | 
 | StableZero123_Conditioning | StableZero123_Conditioning | [StableZero123_Conditioning]("docs/StableZero123_Conditioning.md") | 
 | StableZero123_Conditioning_Batched | StableZero123_Conditioning_Batched | [StableZero123_Conditioning_Batched]("docs/StableZero123_Conditioning_Batched.md") | 
-| String to Float | String to Float | [String to Float]("docs/String to Float.md") | 
-| String to Integer | String to Integer | [String to Integer]("docs/String to Integer.md") | 
+| String to Float | String to Float | [String to Float]("docs/String%20to%20Float.md") | 
+| String to Integer | String to Integer | [String to Integer]("docs/String%20to%20Integer.md") | 
 | StyleModelApply | StyleModelApply | [StyleModelApply]("docs/StyleModelApply.md") | 
 | StyleModelLoader | StyleModelLoader | [StyleModelLoader]("docs/StyleModelLoader.md") | 
 | ThresholdMask | ThresholdMask | [ThresholdMask]("docs/ThresholdMask.md") | 
