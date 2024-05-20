@@ -14,7 +14,7 @@ files.forEach((file) => {
     const fileName = file.split('.')[0];
     const fileSize = fs.statSync(path.join(docsDir, file)).size;
     const link = file.replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/ /g, '%20');
-    tableMd += `| ${fileName} | ${fileName} | [${fileName}](docs/${link}) | ${ fileSize ? '✅' : '❌' } ] | \n`;
+    tableMd += `| ${fileName} | ${fileName} | [${fileName}](docs/${link}) | ${ fileSize ? '✅' : '❌' } | \n`;
   }
 })
 
