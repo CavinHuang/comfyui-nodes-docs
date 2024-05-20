@@ -220,6 +220,6 @@
 
 | Task       | Completed  |
 |------------|------------|
-| Task 1     | [x]        |
+| Task 1     | <input type="checkbox" checked />        |
 | Task 2     | [ ]        |
 | Task 3     | [x]        |
