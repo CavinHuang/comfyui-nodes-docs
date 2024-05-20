@@ -13,7 +13,7 @@ files.forEach((file) => {
   if (file.endsWith('.md')) {
     const fileName = file.split('.')[0];
     const link = file.replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/ /g, '%20');
-    tableMd += `| ${fileName} | ${fileName} | [${fileName}]("docs/${link}") | \n`;
+    tableMd += `| ${fileName} | ${fileName} | [${fileName}](docs/${link}) | \n`;
   }
 })
 
