@@ -1,24 +1,41 @@
 # comfyUI Nodes Documentation
 
-This is the documentation for the comfyUI every nodes.
+----
+
+[中文文档](README_zh.md) ｜ English Document
+
+This is a plugin for displaying documentation for each comfyui node.
 
 ![example1](examples/2.png)
 
-## installation
+## Installation
+
+### comfyUI Manager
+
+search `comfyui-nodes-docs` in the comfyUI manager and install it.
+
+### Custom Installation
 
 - Open the cmd window in the plugin directory of ComfyUI, like "ComfyUI\custom_nodes"，type `git clone https://github.com/CavinHuang/comfyui-nodes-docs` or download the zip file and extracted, copy the resulting folder to ComfyUI\custom_ Nodes\
 
 - Restart ComfyUI
 
-## development
+## Development
 
-### fork the repo
+### Two aspects:
+
+- Participate in the maintenance of the plugin, fix issues, improve the user experience, optimize the code
+
+- Participate in the construction of node documentation, add node documentation that has not yet been included, modify incorrect parts in existing node documentation, or document lagging issues caused by plugin upgrades.
+
+### Participation method:
 
 - Fork the repo to your own github account
 - Create a new branch for your changes and make the changes
 - Create a pull request to the main repo
+- After review, your changes will be merged into the main branch and released to the public.
 
-### add a new node docs
+### Add a new node docs
 
 - Create a Markdown file named after the `node type` in the 'docs' folder, such as `CLIPMergeSimple.md`
 - Add the following structure to the file, please refer to specific examples[CLIPMergeSimple.md](docs/CLIPMergeSimple.md) for details.:
