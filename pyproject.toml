@@ -9,6 +9,6 @@ Repository = "https://github.com/CavinHuang/comfyui-nodes-docs"
 #  Used by Comfy Registry https://comfyregistry.org
 
 [tool.comfy]
-PublisherId = ""
+PublisherId = "cavinhuang"
 DisplayName = "comfyui-nodes-docs"
 Icon = ""
