@@ -2,45 +2,50 @@
 
 ----
 
-[中文文档](README_zh.md) ｜ English Document
+中文文档｜ [English Document](README_en.md)
 
-This is a plugin for displaying documentation for each comfyui node.
+这是一个用于显示每个comfyui节点文档的插件。
+
 
 ![example1](examples/2.png)
 
-## Installation
+## 安装
 
 ### comfyUI Manager
 
-search `comfyui-nodes-docs` in the comfyUI manager and install it.
+在comfyUI管理器中搜索`comfyui-nodes-docs`并安装。
 
-### Custom Installation
+### 自定义安装
 
-- Open the cmd window in the plugin directory of ComfyUI, like "ComfyUI\custom_nodes"，type `git clone https://github.com/CavinHuang/comfyui-nodes-docs` or download the zip file and extracted, copy the resulting folder to ComfyUI\custom_ Nodes\
+- 在ComfyUI的插件目录中打开cmd窗口，例如"ComfyUI\custom_nodes"，输入`git clone https://github.com/CavinHuang/comfyui-nodes-docs` 或下载zip文件并解压，将生成的文件夹复制到ComfyUI\custom_ Nodes\
 
-- Restart ComfyUI
+- 重新启动ComfyUI
 
-## [Node Lists](nodesList.md)
+## [节点列表](nodesList.md)
 
-## Development
+## 参与共建
 
-### Two aspects:
+### 两个方面：
 
-- Participate in the maintenance of the plugin, fix issues, improve the user experience, optimize the code
+- 参与插件的维护，修复问题，提升使用体验，优化代码
 
-- Participate in the construction of node documentation, add node documentation that has not yet been included, modify incorrect parts in existing node documentation, or document lagging issues caused by plugin upgrades.
+- 参与节点文档的建设，新增还未收录的节点文档，修改已有节点文档中不正确的地方，或者因为插件升级导致的文档滞后问题。
 
-### Participation method:
+### 参与方式如下：
 
-- Fork the repo to your own github account
-- Create a new branch for your changes and make the changes
-- Create a pull request to the main repo
-- After review, your changes will be merged into the main branch and released to the public.
+- Fork一份代码到你的github中
 
-### Add a new node docs
+- 创建一个新的分支用于修改你的变化，在你的仓库中完成你所有的变化，并且提交。
 
-- Create a Markdown file named after the `node type` in the 'docs' folder, such as `CLIPMergeSimple.md`
-- Add the following structure to the file, please refer to specific examples[CLIPMergeSimple.md](docs/CLIPMergeSimple.md) for details.:
+- 创建一个Pull Request，提交你的变化分支合并申请到main分支
+
+- 通过审核后，将会发布你的代码到最新的main分支，公众将可以使用你提交的特性。
+
+### 添加新的节点文档
+
+- 在`docs`文件夹中创建一个以`节点类型`命名的Markdown文件，例如`CLIPMergeSimple.md`
+
+- 在文件中添加以下结构，请参考具体示例[CLIPMergeSimple.md](docs/CLIPMergeSimple.md)：
 
 <pre><code>
 # Documentation
@@ -67,3 +72,11 @@ Node output types
 Node source code
 </code></pre>
 
+## 更新日志
+
+### 2024-05-25
+- 在设置中增加了开关，可以选择是否显示节点的文档
+- 增加文档本地修改功能，如果觉得文档有问题，可以在本地修改，不会影响到其他人
+- 在设置中增加了是否参与共建的开关，可以选择是否参与共建，默认打开，打开后会把本地修改的记录，记录到云DB上，后期经过审核后会合并到主分支上
+- 增加导出文档和导入文档功能，导出文档会把本地修改的记录和仓库提供的文档导出下载，导入文档会把导出的文档导入到本地，不会影响主仓库的文档。
+- 修复了一些bug
