@@ -290,68 +290,6 @@ LGraphCanvas.prototype.processMouseDown = function(e) {
   }
 }
 
-// 注册前端插件
-app.registerExtension({
-  name: 'Leo.NodeDocs',
-  setup() {
-    if (!app.ui.settings.getSettingValue(ENABLED_SETTING_KEY)) return
-    // window resize重新计算所有文档的位置
-    window.addEventListener('resize', throttle(() => {
-      cacheNodePositonMap.forEach((value, key) => {
-        const node = app.graph.getNodeById(key)
-        if(node) {
-          const [nLeft, nTop, nWidth, nHeight] = node.getBounding()
-          const ele = nodeDocsEleMap.get(key)
-          if(ele) {
-            ele.style.left = (nLeft + nWidth + 20) + 'px'
-          }
-        }
-      })
-    }, 1000))
-  },
-  nodeCreated: function(node, app) {
-    if (!app.ui.settings.getSettingValue(ENABLED_SETTING_KEY)) return
-    if(!node.doc_enabled) {
-      let orig = node.onDrawForeground;
-        if(!orig)
-          orig = node.__proto__.onDrawForeground;
-      node.onDrawForeground = function (ctx) {
-        drawDocIcon(node, orig, arguments)
-      };
-      node.doc_enabled = true;
-      console.log('=======', node)
-
-      console.log(1, node)
-      const oDb = node.onMouseDown
-      node.onMouseDown = function(e) {
-        oDb?.apply(node, arguments)
-        const { canvasX, canvasY } = e
-
-        // 通过node的位置信息判断是否点击了文档图标
-        const [nLeft, nTop, nWidth, nHeight] = node.getBounding()
-        const iconX = nLeft + nWidth - 22
-        const iconY = nTop
-        const iconX1 = nLeft + nWidth
-        const iconY1 = nTop + 22
-        console.log(canvasX, canvasY, iconX, iconY, iconX1, iconY1)
-        if(canvasX >= iconX && canvasX <= iconX1 && canvasY >= iconY && canvasY <= iconY1) {
-          console.log('打开文档')
-          showNodeDocs(node)
-          e.preventDefault()
-          e.stopPropagation()
-          return false
-        }
-      }
-    }
-  },
-  loadedGraphNode(node, app) {
-    if (!app.ui.settings.getSettingValue(ENABLED_SETTING_KEY)) return
-		if(!node.doc_enabled) {
-			const orig = node.onDrawForeground;
-			node.onDrawForeground = function (ctx) { drawDocIcon(node, orig, arguments) };
-		}
-	},
-});
 
 // 增加设置项目
 app.ui.settings.addSetting({
@@ -365,6 +303,12 @@ app.ui.settings.addSetting({
     }
   }
 })
+
+const getSettingEnable = () => {
+  const settingValue = app.ui.settings.getSettingValue(ENABLED_SETTING_KEY)
+
+  return settingValue === undefined ? true : settingValue
+}
 
 // 增加设置导出文档项目
 const settingId = "comfyui.nodes.docs.export";
@@ -458,3 +402,67 @@ app.ui.settings.addSetting({
     }
   }
 })
+
+// 注册前端插件
+app.registerExtension({
+  name: 'Leo.NodeDocs',
+  setup() {
+    console.log(getSettingEnable())
+    if (!getSettingEnable()) return
+    // window resize重新计算所有文档的位置
+    window.addEventListener('resize', throttle(() => {
+      cacheNodePositonMap.forEach((value, key) => {
+        const node = app.graph.getNodeById(key)
+        if(node) {
+          const [nLeft, nTop, nWidth, nHeight] = node.getBounding()
+          const ele = nodeDocsEleMap.get(key)
+          if(ele) {
+            ele.style.left = (nLeft + nWidth + 20) + 'px'
+          }
+        }
+      })
+    }, 1000))
+  },
+  nodeCreated: function(node, app) {
+    if (!getSettingEnable()) return
+    if(!node.doc_enabled) {
+      let orig = node.onDrawForeground;
+        if(!orig)
+          orig = node.__proto__.onDrawForeground;
+      node.onDrawForeground = function (ctx) {
+        drawDocIcon(node, orig, arguments)
+      };
+      node.doc_enabled = true;
+      console.log('=======', node)
+
+      console.log(1, node)
+      const oDb = node.onMouseDown
+      node.onMouseDown = function(e) {
+        oDb?.apply(node, arguments)
+        const { canvasX, canvasY } = e
+
+        // 通过node的位置信息判断是否点击了文档图标
+        const [nLeft, nTop, nWidth, nHeight] = node.getBounding()
+        const iconX = nLeft + nWidth - 22
+        const iconY = nTop
+        const iconX1 = nLeft + nWidth
+        const iconY1 = nTop + 22
+        console.log(canvasX, canvasY, iconX, iconY, iconX1, iconY1)
+        if(canvasX >= iconX && canvasX <= iconX1 && canvasY >= iconY && canvasY <= iconY1) {
+          console.log('打开文档')
+          showNodeDocs(node)
+          e.preventDefault()
+          e.stopPropagation()
+          return false
+        }
+      }
+    }
+  },
+  loadedGraphNode(node, app) {
+    if (!app.ui.settings.getSettingValue(ENABLED_SETTING_KEY)) return
+		if(!node.doc_enabled) {
+			const orig = node.onDrawForeground;
+			node.onDrawForeground = function (ctx) { drawDocIcon(node, orig, arguments) };
+		}
+	},
+});
