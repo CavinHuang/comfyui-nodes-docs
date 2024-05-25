@@ -3,3 +3,6 @@ __pycache__
 .vscode/
 .idea/
 node_modules/
+.cache/**
+!.cache/.cache_directory
+!.cache/.setting.json

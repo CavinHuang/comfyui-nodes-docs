@@ -1,7 +1,10 @@
+//@ts-nocheck
+import {$el} from "../../scripts/ui.js";
 import { app } from "../../scripts/app.js";
 import { marked } from './marked.js'
+import { throttle } from './utils.js'
 
-console.log('app', app)
+const ENABLED_SETTING_KEY = 'comfyui-nodes-docs.enabled'
 
 /**
  * 1: {
@@ -66,6 +69,42 @@ const hideActiveDocs = function() {
   }
 }
 
+// 缓存到本地
+const fetchCacheDNodeDoc = async function(nodeName) {
+  const res = await fetch('/customnode/cacheNodeInfo?nodeName=' + nodeName)
+  const jsonData = await res.json()
+  return jsonData
+}
+
+// 保存文档到本地
+const saveNodeDoc = async function(nodeName, content) {
+  const res = await fetch('/customnode/updateNodeInfo', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      nodeName,
+      content
+    })
+  })
+
+  return await res.json()
+}
+
+// 更新设置文件
+const updateSettingFile = async function(setting) {
+  const res = await fetch('/customnode/updateSetting', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(setting)
+  })
+  const jsonData = await res.json()
+  return jsonData
+}
+
 /**
  * 显示节点文档
  * @param {*} node
@@ -73,7 +112,7 @@ const hideActiveDocs = function() {
  */
 const showNodeDocs = async function(node) {
   const ele = nodeDocsEleMap.get(node.id)
-  const [nLeft, nTop, nWidth, nHeight] = node.getBounding()
+  // const [nLeft, nTop, nWidth, nHeight] = node.getBounding()
   if(ele) {
     ele.style.display = 'block'
     // 更新位置
@@ -99,13 +138,6 @@ const showNodeDocs = async function(node) {
   document.body.appendChild(divWrap)
 
   const buttonClose = document.createElement('button')
-  /**
-    background-color: rgba(0, 0, 0, 0);
-    padding: 0;
-    border: none;
-    cursor: pointer;
-    font-size: inherit;
-   */
   buttonClose.style.backgroundColor = 'rgba(0, 0, 0, 0)'
   buttonClose.style.padding = '0'
   buttonClose.style.border = 'none'
@@ -127,10 +159,10 @@ const showNodeDocs = async function(node) {
 
   const divContentWrap = document.createElement('div')
   divContentWrap.style.background = 'var(--comfy-input-bg)'
-  divContentWrap.style.height = 'calc(100% - 44px)'
+  divContentWrap.style.height = 'calc(100% - 44px - 70px)'
   divContentWrap.style.padding = '10px'
   divContentWrap.style.borderRadius = '10px'
-  divContentWrap.style.overflowX = 'hidden'
+  divContentWrap.style.overflow = 'hidden'
   divContentWrap.style.overflowY = 'auto'
 
   divWrap.appendChild(divButtonWrap)
@@ -144,6 +176,87 @@ const showNodeDocs = async function(node) {
 
   divContentWrap.innerHTML = html || node.description || '暂无文档'
 
+  // 编辑框
+  const editWrap = document.createElement('div')
+  editWrap.style.display = 'none'
+  editWrap.style.padding = '20px'
+  editWrap.borderRadius = '10px'
+  editWrap.style.backgroundColor = 'var(--comfy-menu-bg)'
+  editWrap.style.color = 'white'
+  editWrap.style.height = 'calc(100% - 44px - 70px)'
+  editWrap.style.boxSizing = 'border-box'
+  const editInput = document.createElement('textarea')
+  editInput.style.width = '100%'
+  editInput.style.height = '100%'
+  editInput.style.backgroundColor = 'var(--comfy-input-bg)'
+  editInput.style.color = 'white'
+  editInput.style.border = 'none'
+  editInput.style.borderRadius = '10px'
+  editInput.style.padding = '10px'
+  editInput.style.resize = 'none'
+  editInput.style.fontSize = '16px'
+  editInput.style.lineHeight = '1.5'
+  editInput.value = jsonData.content
+  editWrap.appendChild(editInput)
+  divWrap.appendChild(editWrap)
+
+  // 增加按钮
+  const buttonWrap = document.createElement('div')
+  buttonWrap.style.display = 'flex'
+  buttonWrap.style.justifyContent = 'flex-end'
+  buttonWrap.style.padding = '20px'
+
+  const editButton = document.createElement('button')
+  editButton.innerText = '编辑'
+  editButton.style.backgroundColor = 'var(--theme-color)'
+  editButton.style.color = 'white'
+  editButton.style.padding = '5px 10px'
+  editButton.style.border = 'none'
+  editButton.style.cursor = 'pointer'
+  editButton.style.borderRadius = '5px'
+
+  const cancelEditButton = document.createElement('button')
+  cancelEditButton.innerText = '取消'
+  cancelEditButton.style.backgroundColor = 'var(--comfy-input-bg)'
+  cancelEditButton.style.color = 'white'
+  cancelEditButton.style.padding = '5px 10px'
+  cancelEditButton.style.border = 'none'
+  cancelEditButton.style.cursor = 'pointer'
+  cancelEditButton.style.display = 'none'
+  cancelEditButton.style.marginLeft = '16px'
+  editButton.style.borderRadius = '5px'
+
+  cancelEditButton.onclick = function() {
+    editWrap.style.display = 'none'
+    divContentWrap.style.display = 'block'
+    editButton.innerText = '编辑'
+    cancelEditButton.style.display = 'none'
+  }
+
+  editButton.onclick = function() {
+    if(editWrap.style.display === 'none') {
+      fetchCacheDNodeDoc(node.type)
+      editWrap.style.display = 'block'
+      divContentWrap.style.display = 'none'
+      editButton.innerText = '保存'
+      cancelEditButton.style.display = 'block'
+    } else {
+      saveNodeDoc(node.type, editInput.value).then(res => {
+        if (res.success) {
+          divContentWrap.innerHTML = marked.parse(editInput.value)
+          editWrap.style.display = 'none'
+          divContentWrap.style.display = 'block'
+          editButton.innerText = '编辑'
+          cancelEditButton.style.display = 'none'
+        }
+      })
+    }
+  }
+
+  buttonWrap.appendChild(editButton)
+  buttonWrap.appendChild(cancelEditButton)
+  divWrap.appendChild(buttonWrap)
+
   if (activeDocsEle) {
     hideActiveDocs()
   }
@@ -152,23 +265,8 @@ const showNodeDocs = async function(node) {
   nodeDocsEleMap.set(node.id, divWrap)
 }
 
-/**
- * 节流函数
- */
-const throttle = function(fn, delay) {
-  let lastTime = 0
-  return function() {
-    const now = Date.now()
-    if(now - lastTime > delay) {
-      fn.apply(this, arguments)
-      lastTime = now
-    }
-  }
-}
-
 const processMouseDown = LGraphCanvas.prototype.processMouseDown
 LGraphCanvas.prototype.processMouseDown = function(e) {
-  console.log('🚀 ~ arguments:', arguments)
   processMouseDown.apply(this, arguments)
   const { canvasX, canvasY } = e
   const nodes = app.graph._nodes
@@ -192,10 +290,11 @@ LGraphCanvas.prototype.processMouseDown = function(e) {
   }
 }
 
+// 注册前端插件
 app.registerExtension({
   name: 'Leo.NodeDocs',
   setup() {
-    console.log('🚀 ~ setup ~ app', app)
+    if (!app.ui.settings.getSettingValue(ENABLED_SETTING_KEY)) return
     // window resize重新计算所有文档的位置
     window.addEventListener('resize', throttle(() => {
       cacheNodePositonMap.forEach((value, key) => {
@@ -211,6 +310,7 @@ app.registerExtension({
     }, 1000))
   },
   nodeCreated: function(node, app) {
+    if (!app.ui.settings.getSettingValue(ENABLED_SETTING_KEY)) return
     if(!node.doc_enabled) {
       let orig = node.onDrawForeground;
         if(!orig)
@@ -245,9 +345,116 @@ app.registerExtension({
     }
   },
   loadedGraphNode(node, app) {
+    if (!app.ui.settings.getSettingValue(ENABLED_SETTING_KEY)) return
 		if(!node.doc_enabled) {
 			const orig = node.onDrawForeground;
 			node.onDrawForeground = function (ctx) { drawDocIcon(node, orig, arguments) };
 		}
 	},
 });
+
+// 增加设置项目
+app.ui.settings.addSetting({
+  id: ENABLED_SETTING_KEY,
+  name: 'comfyui nodes docs enabled',
+  type: 'boolean',
+  defaultValue: true,
+  onChange: (newValue, oldValue) => {
+    if (newValue !== oldValue && oldValue !== undefined) {
+      window.location.reload()
+    }
+  }
+})
+
+// 增加设置导出文档项目
+const settingId = "comfyui.nodes.docs.export";
+const htmlSettingId = settingId.replaceAll(".", "-");
+app.ui.settings.addSetting({
+  id: 'comfyui-nodes-docs.export',
+  name: 'comfyui nodes docs export',
+  type: (name, setter, value) => {
+    return $el("tr", [
+      $el("td", [
+        $el("label", {
+          textContent: "comfyui nodes docs export",
+          for: htmlSettingId,
+        }),
+      ]),
+      $el("td", [
+        $el("button", {
+          textContent: "export docs",
+          onclick: async () => {
+            const res = await fetch('/customnode/exportNodeInfo')
+            const blob = await res.blob()
+            // 把blob转成uri
+            const uri = URL.createObjectURL(blob)
+            const a = document.createElement('a')
+            a.href = uri
+            a.download = 'nodes-docs.zip'
+            a.click()
+          },
+          style: {
+            fontSize: "14px",
+            display: "block",
+            marginTop: "5px",
+          },
+        }),
+      ]),
+    ]);
+  }
+})
+
+// 增加设置导入文档项目
+const settingId2 = "comfyui.nodes.docs.import";
+const htmlSettingId2 = settingId2.replaceAll(".", "-");
+app.ui.settings.addSetting({
+  id: 'comfyui-nodes-docs.import',
+  name: 'comfyui nodes docs import',
+  type: (name, setter, value) => {
+    return $el("tr", [
+      $el("td", [
+        $el("label", {
+          textContent: "comfyui nodes docs import",
+          for: htmlSettingId2,
+        }),
+      ]),
+      $el("td", [
+        $el("input", {
+          id: htmlSettingId2,
+          type: "file",
+          onchange: async (event) => {
+            const file = event.target.files[0]
+            const formData = new FormData()
+            formData.append('file', file)
+            const res = await fetch('/customnode/importNodeInfo', {
+              method: 'POST',
+              body: formData
+            })
+            const jsonData = await res.json()
+            if(jsonData.success) {
+              alert('导入成功')
+            } else {
+              alert('导入失败')
+            }
+          },
+        }),
+      ]),
+    ]);
+  }
+})
+
+// 增加设置参与共建项目
+app.ui.settings.addSetting({
+  id: 'comfyui-nodes-docs.contribute',
+  name: 'comfyui nodes docs contribute',
+  type: 'boolean',
+  defaultValue: true,
+  onChange: (newValue, oldValue) => {
+    if (newValue !== oldValue && oldValue !== undefined) {
+      updateSettingFile({
+        key: 'contribute',
+        value: newValue
+      })
+    }
+  }
+})
