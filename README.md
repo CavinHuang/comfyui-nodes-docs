@@ -1,6 +1,14 @@
-# comfyUI Nodes Documentation
+<!-- markdownlint-disable -->
+<p align="center">
+  <img width="240" src="logo.png" style="text-align: center;"/>
+</p>
+<h1 align="center">comfyui-nodes-docs</h1>
+<h4 align="center">Docs for every ComfyUI's node ✨ / ComfyUI节点文档✨</h4>
 
-----
+[![Author: Mr.Huang & Leo](https://img.shields.io/badge/作者-Mr.Huang-blue.svg?style=for-the-badge)]
+[![ComfyuUI](https://img.shields.io/badge/ComfyUI-blue.svg?style=for-the-badge)](https://github.com/comfyanonymous/ComfyUI)
+
+<!-- markdownlint-restore -->
 
 中文文档｜ [English Document](README_en.md)
 
@@ -73,6 +81,10 @@ Node source code
 </code></pre>
 
 ## 更新日志
+
+### 2024-05-26
+- 修复了文档中的一些错误
+- 更新了很多节点文档，可查看文档目录
 
 ### 2024-05-25
 - 在设置中增加了开关，可以选择是否显示节点的文档
