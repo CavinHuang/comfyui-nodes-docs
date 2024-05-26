@@ -78,12 +78,31 @@ def get_device_id():
     divce_id = write_device_id()
     return divce_id
 
+# win: <>:"/\|?*
+paths_ignore_rules = [
+   ['/', '%2F'],
+   ['\\', '%5C'],
+   [':', '%3A'],
+   ['*', '%2A'],
+   ['|', '%7C'],
+   ['<', '%3C'],
+   ['>', '%3E'],
+   ['"', '%22'],
+   ['?', '%3F']]
+
+def replace_ignore_rules(path):
+  for rule in paths_ignore_rules:
+    path = path.replace(rule[0], rule[1])
+  return path
+
 # Add route to fetch node info
 @PromptServer.instance.routes.get("/customnode/getNodeInfo")
 async def fetch_customnode_node_info(request):
   try:
     node_name = request.rel_url.query["nodeName"]
+    node_name = replace_ignore_rules(node_name)
 
+    print(node_name)
     if not node_name:
       return web.json_response({"content": ""})
 
@@ -102,6 +121,7 @@ async def fetch_customnode_node_info(request):
 async def cache_customnode_node_info(request):
   try:
     node_name = request.rel_url.query["nodeName"]
+    node_name = replace_ignore_rules(node_name)
 
     if not node_name:
       return web.json_response({"success": False, "content": ""})
@@ -118,18 +138,21 @@ async def cache_customnode_node_info(request):
     print(e)
     return web.json_response({"success": False, "content": ''})
 
+
 # Add route to update node info
 @PromptServer.instance.routes.post("/customnode/updateNodeInfo")
 async def update_customnode_node_info(request):
   try:
     json_data = await request.json()
     node_name = json_data["nodeName"]
+    node_name = replace_ignore_rules(node_name)
     # node_name = request.rel_url.query["nodeName"]
     content = json_data["content"]
 
     if not node_name:
       return web.json_response({"success": False})
 
+    node_name = replace_ignore_rules(node_name)
     write_cache_file(node_name, content)
 
     contribute = get_setting_item('contribute')
