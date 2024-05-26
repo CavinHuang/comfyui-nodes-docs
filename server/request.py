@@ -141,7 +141,6 @@ async def update_customnode_node_info(request):
   except Exception as e:
     return web.json_response({"success": False})
 
-
 # ================================== 以下是导出节点文档的代码 ==================================
 def get_all_files(directory):
     """ 获取目录下所有文件的路径 """
@@ -203,7 +202,6 @@ async def export_customnode_node_info(request):
      print(e)
   finally:
       os.remove(temp_zip.name)  # 删除临时文件
-
 
 # Add route to import node info
 @PromptServer.instance.routes.post("/customnode/importNodeInfo")

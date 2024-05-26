@@ -12,27 +12,11 @@ KSampler节点旨在对给定模型执行采样操作。它利用各种参数控
     - 模型参数对于KSampler节点至关重要，因为它定义了将用于采样的底层模型。模型的选择显著影响节点的执行和生成的潜在表示的质量。
     - Comfy dtype: MODEL
     - Python dtype: torch.nn.Module
- - positive
-    - positive参数提供指导采样过程的条件信息，以生成更相关和准确的潜在表示。当目标是采样中的特定结果时，这是一个重要方面。
-    - Comfy dtype: CONDITIONING
-    - Python dtype: Dict[str, torch.Tensor]
-- negative
-    - negative参数与positive参数类似，提供条件信息，但在这种情况下，它用于指导采样过程远离某些结果。它有助于完善采样过程，以避免不希望的结果。
-    - Comfy dtype: CONDITIONING
-    - Python dtype: Dict[str, torch.Tensor]
-- latent_image
-    - latent_image参数表示采样过程的初始潜在状态，用作采样过程的起点。它是一个关键输入，直接影响节点的最终输出，决定采样的方向。
-    - Comfy dtype: LATENT
-    - Python dtype: Dict[str, torch.Tensor]
-## Optional
 - seed
-    - 此参数表示此次采样的种子数值，每张图片都有一个独一的数值，也叫随机种。
-- control_after_generate
-    - 此参数可以更改随机种数值的变化形式，
-       - fixed（固定随机种，在下次采样时，种子数值不会改变，适用于固定图片样式的情况下调整其他参数来细微改变图片）
-       - increment（增加随机种子数值，每次采样随机数值+1）
-       - decrement(减少随机种子数值，每次采样随机数值-1)
-       - randomize(每次采样随机种子数值会无规律的随机变化)
+    - 种子参数对于确保采样过程的可重复性至关重要。它初始化随机数生成器，这影响采样中使用的噪声模式，从而影响结果的一致性和可靠性。
+    - Comfy dtype: INT
+    - Python dtype: int
+## Optional
 - steps
     - 步骤参数确定采样过程中的迭代次数。它直接影响生成的潜在表示的收敛和细节水平，更多的步骤通常会导致更高质量的输出。
     - Comfy dtype: INT
@@ -49,6 +33,18 @@ KSampler节点旨在对给定模型执行采样操作。它利用各种参数控
     - scheduler参数定义了在采样过程中要使用的学习能力调度器。它是一个关键组件，用于随时间调整学习能力，这可以极大地影响采样的效率和效果。
     - Comfy dtype: comfy.samplers.KSampler.SCHEDULERS
     - Python dtype: str
+- positive
+    - positive参数提供指导采样过程的条件信息，以生成更相关和准确的潜在表示。当目标是采样中的特定结果时，这是一个重要方面。
+    - Comfy dtype: CONDITIONING
+    - Python dtype: Dict[str, torch.Tensor]
+- negative
+    - negative参数与positive参数类似，提供条件信息，但在这种情况下，它用于指导采样过程远离某些结果。它有助于完善采样过程，以避免不希望的结果。
+    - Comfy dtype: CONDITIONING
+    - Python dtype: Dict[str, torch.Tensor]
+- latent_image
+    - latent_image参数表示采样过程的初始潜在状态，用作采样过程的起点。它是一个关键输入，直接影响节点的最终输出，决定采样的方向。
+    - Comfy dtype: LATENT
+    - Python dtype: Dict[str, torch.Tensor]
 - denoise
     - denoise参数控制采样过程中应用的去噪水平。这是一个重要的调整参数，可以提高生成的潜在表示的清晰度和质量。
     - Comfy dtype: FLOAT
