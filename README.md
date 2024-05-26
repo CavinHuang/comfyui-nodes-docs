@@ -5,7 +5,7 @@
 <h1 align="center">comfyui-nodes-docs</h1>
 <h4 align="center">Docs for every ComfyUI's node ✨ / ComfyUI节点文档✨</h4>
 
-[![Author: Mr.Huang & Leo](https://img.shields.io/badge/作者-Mr.Huang-blue.svg?style=for-the-badge)]
+[![Author: Mr.Huang & Leo]](https://img.shields.io/badge/作者-Mr.Huang&Leo-blue.svg?style=for-the-badge)
 [![ComfyuUI](https://img.shields.io/badge/ComfyUI-blue.svg?style=for-the-badge)](https://github.com/comfyanonymous/ComfyUI)
 
 <!-- markdownlint-restore -->
