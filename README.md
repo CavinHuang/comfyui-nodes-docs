@@ -53,6 +53,10 @@
 
 - 通过审核后，将会发布你的代码到最新的main分支，公众将可以使用你提交的特性。
 
+### 提交新的待适配文档的节点
+
+如果你有需要待添加文档的节点，自己无法独自完成，你也可以在issue 或者 [comfyui节点文档待补充收集表](https://g4je62387v.feishu.cn/sheets/PinRs9EblhFUbDteDP6cHI5UngF?from=from_copylink)中提交，我们会尽快添加。
+
 ### 添加新的节点文档
 
 - 在`docs`文件夹中创建一个以`节点类型`命名的Markdown文件，例如`CLIPMergeSimple.md`
