@@ -3,7 +3,7 @@
   <img width="240" src="logo.png" style="text-align: center;"/>
 </p>
 <h1 align="center">comfyui-nodes-docs</h1>
-<h4 align="center">Docs for every ComfyUI's node ✨ / ComfyUI节点文档✨</h4>
+<h4 align="center">Documentation plugin for 1900+ comfyui nodes ✨ / 1900+ComfyUI节点文档✨</h4>
 
 ![Author: 水门Minato & Leo](https://img.shields.io/badge/作者-水门Minato&Leo-blue.svg?style=for-the-badge)
 [![ComfyuUI](https://img.shields.io/badge/ComfyUI-blue.svg?style=for-the-badge)](https://github.com/comfyanonymous/ComfyUI)
@@ -12,7 +12,7 @@
 
 中文文档｜ [English Document](README_en.md)
 
-这是一个用于显示每个comfyui节点文档的插件。
+这是一个用于显示1900+comfyui节点文档的插件。
 
 
 ![example1](examples/2.png)
