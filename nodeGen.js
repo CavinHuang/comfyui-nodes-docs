@@ -89,7 +89,11 @@ const nodeGen = (nav) => {
             if (!fs.existsSync(enPluginDoc)) {
                 fs.mkdirSync(enPluginDoc, { recursive: true });
             }
-            fs.copyFileSync(enNodeDocPath, _enNodeDocPath);
+            if (!fs.existsSync(_enNodeDocPath)) {
+              needAddFileContent[pluginName].push(nodeName);
+            } else {
+              fs.copyFileSync(enNodeDocPath, _enNodeDocPath);
+            }
         }
     }
 
