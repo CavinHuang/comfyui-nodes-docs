@@ -33,7 +33,8 @@
 
 - 如果你已经安装过comfy-cli，可以直接在终端中输入`comfy node registry-install comfyui-nodes-docs`，然后重启ComfyUI即可。
 
-## [节点列表](nodesList.md)
+## 节点列表
+- 整理中
 
 ## 参与共建
 
