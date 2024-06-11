@@ -36,7 +36,7 @@ const windowsPathIgnore = [
     ['>', '%3E'],
     ['"', '%22'],
     ['?', '%3F']]
-  
+
   const repairePath = (fileName) => {
     let name = fileName;
     windowsPathIgnore.forEach((item) => {
@@ -67,7 +67,7 @@ const nodeGen = (nav) => {
             const enNodeDoc = node[nodeName];
             const enNodeDocPath = path.join(originDocsDir, repairePath(enNodeDoc));
             console.log(enNodeDocPath);
-            
+
             const _nodeDocPath = path.join(nodeDocsDir, `${repairePath(nodeName)}.md`);
             const _enNodeDocPath = path.join(nodesDocsDir, 'en-US', pluginName, `${repairePath(nodeName)}.md`);
             const _cnNodeDocPath = path.join(cnPluginDoc, `${repairePath(nodeName)}.md`);
@@ -95,7 +95,6 @@ const nodeGen = (nav) => {
 
     // console.log(needAddFileContent);
     fs.writeFileSync(needAddFile, JSON.stringify(needAddFileContent, null, 2));
-
 }
 
 nodeGen(nav);
