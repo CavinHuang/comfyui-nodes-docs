@@ -534,11 +534,6 @@
     "BRIAAI Matting",
     "Robust Video Matting"
   ],
-  "ComfyUI-VideoHelperSuite": [
-    "VHS_LoadAudioUpload",
-    "VHS_LoadImagesPath",
-    "VHS_LoadVideoPath"
-  ],
   "ComfyUI_Custom_Nodes_AlekPet": [
     "ArgosTranslateCLIPTextEncodeNode",
     "ArgosTranslateTextNode",
