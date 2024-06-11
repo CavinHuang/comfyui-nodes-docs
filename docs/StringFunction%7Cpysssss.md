@@ -40,8 +40,8 @@ String Function节点提供了操作字符串的实用工具，包括追加、�
 
 ## Usage tips
 - Infra type: CPU
-- Common nodes:
-    - [CLIPTextEncode](../../Comfy/Nodes/CLIPTextEncode.md)
+<!-- - Common nodes:
+    - [CLIPTextEncode](../../Comfy/Nodes/CLIPTextEncode.md) -->
 
 ## Source code
 ```python

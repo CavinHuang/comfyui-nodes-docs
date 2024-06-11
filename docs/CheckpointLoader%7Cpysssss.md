@@ -30,7 +30,7 @@
 
 ## Usage tips
 - Infra type: CPU
-- Common nodes:
+<!-- - Common nodes:
     - [LoraLoader|pysssss](../../ComfyUI-Custom-Scripts/Nodes/LoraLoader|pysssss.md)
     - [VAEDecode](../../Comfy/Nodes/VAEDecode.md)
     - [VAEEncodeForInpaint](../../Comfy/Nodes/VAEEncodeForInpaint.md)
@@ -40,7 +40,7 @@
     - [ImpactWildcardEncode](../../ComfyUI-Impact-Pack/Nodes/ImpactWildcardEncode.md)
     - [Anything Everywhere](../../cg-use-everywhere/Nodes/Anything Everywhere.md)
     - Reroute
-    - Junction
+    - Junction -->
 
 ## Source code
 ```python

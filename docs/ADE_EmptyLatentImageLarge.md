@@ -30,9 +30,9 @@ ADE_EmptyLatentImageLarge节点旨在初始化一个用零填充的大型潜在�
 
 ## Usage tips
 - Infra type: GPU
-- Common nodes:
+<!-- - Common nodes:
     - [BatchPromptScheduleLatentInput](../../ComfyUI_FizzNodes/Nodes/BatchPromptScheduleLatentInput.md)
-    - [KSampler](../../Comfy/Nodes/KSampler.md)
+    - [KSampler](../../Comfy/Nodes/KSampler.md) -->
 
 ## Source code
 ```python

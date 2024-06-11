@@ -57,8 +57,8 @@ ADE_AnimateDiffLoaderGen1 节点旨在加载和初始化第一代 AnimateDiff �
     - Python dtype: `str`
 ## Usage tips
 - Infra type: `CPU`
-- Common nodes:
-    - [KSampler](../../Comfy/Nodes/KSampler.md)
+<!-- - Common nodes:
+    - [KSampler](../../Comfy/Nodes/KSampler.md) -->
 
 ## Source code
 ```python
@@ -104,7 +104,7 @@ class AnimateDiffLoaderGen1:
         motion_model.scale_multival = scale_multival
         motion_model.effect_multival = effect_multival
         motion_model.keyframes = ad_keyframes.clone() if ad_keyframes else ADKeyframeGroup()
-        
+
         # create injection params
         params = InjectionParams(unlimited_area_hack=False, model_name=motion_model.model.mm_info.mm_name)
         # apply context options
@@ -120,13 +120,13 @@ class AnimateDiffLoaderGen1:
         # backwards compatibility to support old way of masking scale
         if params.motion_model_settings.mask_attn_scale is not None:
             motion_model.scale_multival = get_combined_multival(scale_multival, (params.motion_model_settings.mask_attn_scale * params.motion_model_settings.attn_scale))
-        
+
         # need to use a ModelPatcher that supports injection of motion modules into unet
         model = ModelPatcherAndInjector.create_from(model, hooks_only=True)
         model.motion_models = MotionModelGroup(motion_model)
         model.sample_settings = sample_settings if sample_settings is not None else SampleSettings()
         model.motion_injection_params = params
-        
+
         if model.sample_settings.custom_cfg is not None:
             logger.info("[Sample Settings] custom_cfg is set; will override any KSampler cfg values or patches.")
 

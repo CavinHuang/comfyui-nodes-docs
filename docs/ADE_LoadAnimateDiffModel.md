@@ -28,8 +28,8 @@
 
 ## Usage tips
 - Infra type: GPU
-- Common nodes:
-    - [ADE_ApplyAnimateDiffModel](../../ComfyUI-AnimateDiff-Evolved/Nodes/ADE_ApplyAnimateDiffModel.md)
+<!-- - Common nodes:
+    - [ADE_ApplyAnimateDiffModel](../../ComfyUI-AnimateDiff-Evolved/Nodes/ADE_ApplyAnimateDiffModel.md) -->
 
 ## Source code
 ```python

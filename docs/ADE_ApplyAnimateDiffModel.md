@@ -52,8 +52,8 @@ ADE_ApplyAnimateDiffModel节点旨在应用高级AnimateDiff模型配置以生�
 
 ## Usage tips
 - Infra type: GPU
-- Common nodes:
-    - [ADE_UseEvolvedSampling](../../ComfyUI-AnimateDiff-Evolved/Nodes/ADE_UseEvolvedSampling.md)
+<!-- - Common nodes:
+    - [ADE_UseEvolvedSampling](../../ComfyUI-AnimateDiff-Evolved/Nodes/ADE_UseEvolvedSampling.md) -->
 
 ## Source code
 ```python
@@ -74,7 +74,7 @@ class ApplyAnimateDiffModelNode:
                 "prev_m_models": ("M_MODELS",),
             }
         }
-    
+
     RETURN_TYPES = ("M_MODELS",)
     CATEGORY = "Animate Diff 🎭🅐🅓/② Gen2 nodes ②"
     FUNCTION = "apply_motion_model"

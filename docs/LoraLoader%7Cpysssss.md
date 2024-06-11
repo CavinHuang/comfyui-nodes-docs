@@ -42,13 +42,13 @@
 
 ## Usage tips
 - Infra type: GPU
-- Common nodes:
+<!-- - Common nodes:
     - [LoraLoader|pysssss](../../ComfyUI-Custom-Scripts/Nodes/LoraLoader|pysssss.md)
     - [ModelSamplingDiscrete](../../Comfy/Nodes/ModelSamplingDiscrete.md)
     - Reroute
     - [CLIPTextEncode](../../Comfy/Nodes/CLIPTextEncode.md)
     - IPAdapterApply
-    - [Anything Everywhere](../../cg-use-everywhere/Nodes/Anything Everywhere.md)
+    - [Anything Everywhere](../../cg-use-everywhere/Nodes/Anything Everywhere.md) -->
 
 ## Source code
 ```python

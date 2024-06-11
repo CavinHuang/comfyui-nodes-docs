@@ -24,12 +24,12 @@ ShowText节点用于在工作流程中显示文本，允许基于输入文本动
 
 ## Usage tips
 - Infra type: CPU
-- Common nodes:
+<!-- - Common nodes:
     - [Text Concatenate](../../was-node-suite-comfyui/Nodes/Text Concatenate.md)
     - [Efficient Loader](../../efficiency-nodes-comfyui/Nodes/Efficient Loader.md)
     - [CLIPTextEncode](../../Comfy/Nodes/CLIPTextEncode.md)
     - [CR Image Output](../../ComfyUI_Comfyroll_CustomNodes/Nodes/CR Image Output.md)
-    - [SavePromptToFile](../../OneButtonPrompt/Nodes/SavePromptToFile.md)
+    - [SavePromptToFile](../../OneButtonPrompt/Nodes/SavePromptToFile.md) -->
 
 ## Source code
 ```python

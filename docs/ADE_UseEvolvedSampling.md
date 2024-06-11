@@ -40,11 +40,11 @@ ADE_UseEvolvedSampling节点将先进的采样技术集成到动画扩散过程�
 
 ## Usage tips
 - Infra type: CPU
-- Common nodes:
+<!-- - Common nodes:
     - [KSampler](../../Comfy/Nodes/KSampler.md)
     - [ToBasicPipe](../../ComfyUI-Impact-Pack/Nodes/ToBasicPipe.md)
     - [SamplerCustom](../../Comfy/Nodes/SamplerCustom.md)
-    - [LCMScheduler](../../ComfyUI-sampler-lcm-alternative/Nodes/LCMScheduler.md)
+    - [LCMScheduler](../../ComfyUI-sampler-lcm-alternative/Nodes/LCMScheduler.md) -->
 
 ## Source code
 ```python
@@ -63,7 +63,7 @@ class UseEvolvedSamplingNode:
                 #"beta_schedule_override": ("BETA_SCHEDULE",),
             }
         }
-    
+
     RETURN_TYPES = ("MODEL",)
     CATEGORY = "Animate Diff 🎭🅐🅓/② Gen2 nodes ②"
     FUNCTION = "use_evolved_sampling"
@@ -108,6 +108,6 @@ class UseEvolvedSamplingNode:
             new_model_sampling = BetaSchedules.to_model_sampling(beta_schedule, model)
             if new_model_sampling is not None:
                 model.add_object_patch("model_sampling", new_model_sampling)
-        
+
         del m_models
         return (model,)
