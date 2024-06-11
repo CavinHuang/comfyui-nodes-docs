@@ -90,6 +90,10 @@ Node source code
 
 ## 更新日志
 
+### 2024-06-11
+- 修复了文档中的一些错误
+- 更新了ComfyUI-AnimateDiff-Evolved/ComfyUI-Custom-Scripts大部分文档，补充了ComfyUI-VideoHelperSuite的部分节点文档
+
 ### 2024-05-26
 - 修复了文档中的一些错误
 - 更新了很多节点文档，可查看文档目录
