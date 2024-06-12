@@ -1,0 +1,63 @@
+# Documentation
+- Class name: ColorValuetoRGBValue
+- Category: 😺dzNodes/LayerUtility/Data
+- Output node: False
+- Repo Ref: https://github.com/chflame163/ComfyUI_LayerStyle
+
+将色值输出为单独的R, G, B三个10进制数值。支持ColorPicker节点输出的HEX和DEC格式。
+
+# Input types
+
+## Required
+
+- color_value
+    -  支持十六进制(HEX)或十进制(DEC)色值，应是string或tuple类型，强行接入其他类型将导致错误。
+    - Comfy dtype: STRING
+    - Python dtype: any
+
+
+# Output types
+
+- value
+    - 输出的颜色。
+    - Comfy dtype: STRING
+    - Python dtype: str
+
+# Usage tips
+- Infra type: GPU
+
+# Source code
+```
+class ColorValuetoRGBValue:
+
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(self):
+
+        return {
+            "required": {
+                "color_value": (any, {}),
+            },
+            "optional": {
+            }
+        }
+
+    RETURN_TYPES = ("INT", "INT", "INT")
+    RETURN_NAMES = ("R", "G", "B")
+    FUNCTION = 'color_value_to_rgb_value'
+    CATEGORY = '😺dzNodes/LayerUtility/Data'
+
+    def color_value_to_rgb_value(self, color_value,):
+        R, G, B = 0, 0, 0
+        if isinstance(color_value, str):
+            color = Hex_to_RGB(color_value)
+            R, G, B = color[0], color[1], color[2]
+        elif isinstance(color_value, tuple):
+            R, G, B = color_value[0], color_value[1], color_value[2]
+        else:
+            log(f"{NODE_NAME}: color_value input type must be tuple or string.", message_type="error")
+
+        return (R, G, B,)
+```
