@@ -13,7 +13,10 @@ const windowsPathIgnore = [
   ['<', '%3C'],
   ['>', '%3E'],
   ['"', '%22'],
-  ['?', '%3F']]
+  ['?', '%3F'],
+  ['[', '%5B'],
+  [']', '%5D'],
+]
 
 const repairePath = (fileName) => {
   let name = fileName;

@@ -1537,8 +1537,22 @@
     "Create Morph Image from Path",
     "Create Video from Path"
   ],
-  "😺dzNodes": [
-    "LayerMask: SegmentAnythingUltra",
-    "LayerMask: SegmentAnythingUltra V2"
+  "ComfyUI_LayerStyle": [
+    "LayerUtility: BatchSelector",
+    "LayerUtility: BatchSelector",
+    "LayerColor: Brightness & Contrast",
+    "LayerColor: Brightness & Contrast",
+    "LayerColor: Color of Shadow & Highlight",
+    "LayerColor: Color of Shadow & Highlight",
+    "LayerUtility: ColorImage V2",
+    "LayerUtility: ColorImage V2",
+    "LayerStyle: ColorOverlay V2",
+    "LayerStyle: ColorOverlay V2",
+    "LayerUtility: RGB Value",
+    "LayerUtility: RGB Value",
+    "LayerMask: Shadow & Highlight Mask",
+    "LayerMask: Shadow & Highlight Mask",
+    "LayerFilter: Sharp & Soft",
+    "LayerFilter: Sharp & Soft"
   ]
 }

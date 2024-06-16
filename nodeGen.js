@@ -7,8 +7,7 @@ const path = require('path');
 
 const yamlPath = './mkdocs.yml';
 
-const doc = yaml.parse
-(fs.readFileSync(yamlPath, 'utf8'));
+const doc = yaml.parse(fs.readFileSync(yamlPath, 'utf8'));
 
 
 const nav = doc.nav;
@@ -90,7 +89,10 @@ const nodeGen = (nav) => {
                 fs.mkdirSync(enPluginDoc, { recursive: true });
             }
             if (!fs.existsSync(_enNodeDocPath)) {
-              needAddFileContent[pluginName].push(nodeName);
+              // zh-CN文件不存在
+              if (!fs.existsSync(_cnNodeDocPath)) {
+                needAddFileContent[pluginName].push(nodeName);
+              }
             } else {
               fs.copyFileSync(enNodeDocPath, _enNodeDocPath);
             }
