@@ -1,0 +1,1 @@
+md/ComfyUI-Custom-Scripts/licenses.md

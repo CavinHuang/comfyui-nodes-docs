@@ -1,0 +1,1 @@
+md/cg-use-everywhere/index.md

@@ -1,0 +1,1 @@
+md/ComfyUI-Allor/licenses.md

@@ -1,0 +1,1 @@
+md/ComfyUI-Flowty-LDSR/licenses.md

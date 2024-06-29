@@ -1,0 +1,1 @@
+md/ComfyUI-IG-Nodes/licenses.md

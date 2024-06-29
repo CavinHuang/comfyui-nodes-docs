@@ -1,0 +1,1 @@
+md/ComfyUI_essentials/licenses.md

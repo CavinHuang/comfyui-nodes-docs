@@ -1,0 +1,1 @@
+md/comfyui-inpaint-nodes/licenses.md

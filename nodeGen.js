@@ -67,9 +67,9 @@ const nodeGen = (nav) => {
 
     if (!pluginNodesHome) continue
 
-    console.log( plugin)
-    console.log(pluginNodesHome)
-    console.log(enPluginDocLicenses)
+    // console.log( plugin)
+    // console.log(pluginNodesHome)
+    // console.log(enPluginDocLicenses)
 
     // 创建文件夹、home、license
     if (!fs.existsSync(enPluginDoc)) {
@@ -103,8 +103,10 @@ const nodeGen = (nav) => {
 
       const _nodeDocPath = path.join(nodeDocsDir, `${repairePath(nodeName)}.md`);
 
+
       const _enNodeDocPath = path.join(enPluginDocNodesDir, `${repairePath(nodeName)}.md`);
       const _cnNodeDocPath = path.join(cnPluginDocNodesDir, `${repairePath(nodeName)}.md`);
+      console.log(_enNodeDocPath)
 
       if (!fs.existsSync(_nodeDocPath)) {
         // console.log('need add file:', nodeName);
@@ -113,23 +115,16 @@ const nodeGen = (nav) => {
         }
         needAddFileContent[pluginName].push(nodeName);
       } else {
-        if (!fs.existsSync(cnPluginDoc)) {
-          fs.mkdirSync(cnPluginDoc, { recursive: true });
-        }
         fs.copyFileSync(_nodeDocPath, _cnNodeDocPath)
       }
 
-      if (!fs.existsSync(enPluginDoc)) {
-        fs.mkdirSync(enPluginDoc, { recursive: true });
-      }
       if (!fs.existsSync(_enNodeDocPath)) {
         // zh-CN文件不存在
         if (!fs.existsSync(_cnNodeDocPath)) {
           needAddFileContent[pluginName].push(nodeName);
         }
-      } else {
-        fs.copyFileSync(enNodeDocPath, _enNodeDocPath);
       }
+      fs.copyFileSync(enNodeDocPath, _enNodeDocPath);
     }
   }
 

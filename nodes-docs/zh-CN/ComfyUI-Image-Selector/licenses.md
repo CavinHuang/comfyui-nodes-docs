@@ -1,0 +1,1 @@
+md/ComfyUI-Image-Selector/licenses.md

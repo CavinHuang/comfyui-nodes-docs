@@ -1,0 +1,1 @@
+md/ComfyUI-Impact-Pack/licenses.md

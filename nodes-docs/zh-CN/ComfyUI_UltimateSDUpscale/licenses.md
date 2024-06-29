@@ -1,0 +1,1 @@
+md/ComfyUI_UltimateSDUpscale/licenses.md

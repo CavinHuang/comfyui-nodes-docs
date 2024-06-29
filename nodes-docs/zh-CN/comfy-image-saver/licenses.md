@@ -1,0 +1,1 @@
+md/comfy-image-saver/licenses.md

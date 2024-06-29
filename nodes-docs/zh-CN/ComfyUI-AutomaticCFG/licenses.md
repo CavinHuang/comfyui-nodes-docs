@@ -1,0 +1,1 @@
+md/ComfyUI-AutomaticCFG/licenses.md

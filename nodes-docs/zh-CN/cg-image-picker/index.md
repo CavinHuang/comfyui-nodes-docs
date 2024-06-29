@@ -1,0 +1,1 @@
+md/cg-image-picker/index.md

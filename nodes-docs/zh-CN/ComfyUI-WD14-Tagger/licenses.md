@@ -1,0 +1,1 @@
+md/ComfyUI-WD14-Tagger/licenses.md

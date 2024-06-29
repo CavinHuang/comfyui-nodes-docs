@@ -1,0 +1,1 @@
+md/ComfyUI-Inspire-Pack/licenses.md

@@ -1,0 +1,1 @@
+md/ComfyUI_InstantID/licenses.md

@@ -1,0 +1,1 @@
+md/ComfyUI-InstanceDiffusion/licenses.md

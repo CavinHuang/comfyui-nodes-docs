@@ -1,0 +1,1 @@
+md/ComfyUI-Marigold/licenses.md

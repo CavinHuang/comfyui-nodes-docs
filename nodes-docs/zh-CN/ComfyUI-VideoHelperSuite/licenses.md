@@ -1,0 +1,1 @@
+md/ComfyUI-VideoHelperSuite/licenses.md

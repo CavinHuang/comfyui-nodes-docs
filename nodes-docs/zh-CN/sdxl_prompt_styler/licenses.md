@@ -1,0 +1,1 @@
+md/sdxl_prompt_styler/licenses.md
