@@ -4,18 +4,26 @@ const path = require('path');
 
 const needAddFile = require('./needAddFile.json');
 
-// const token = 'fastgpt-wp115NwJf38ytxxis4ELY7P9nuGFmxwt0Nh27uaDR0t2eMIwStzj'
-
-// const url = 'http://localhost:3002/api/v1/chat/completions'
+const token = 'fastgpt-m1Z2Mcvb9rsvNGBAhOXWbom3B5sBTrWEEnSSZ0KiH7oIbWVQROJuSztWgfPiQ'
+const url = 'http://localhost:3002/api/v1/chat/completions'
+const randomId = () => Math.random().toString(36).substr(2, 10)
 
 // const fsContent = fs.readFileSync(path.resolve(__dirname, './nodes-docs/en-US/Comfy/docs/AddNoise.md'), 'utf8')
 
+
 // const postData = {
 //     model: 'qwen2:7b',
-//     chatId: '2',
+//     chatId: 'kudm64gieTFH',
+//     appId: '6680ba4c6ebed5735c5eb611',
 //     messages: [
 //         {
+//             content: "",
+//             dataId: randomId(),
+//             role: "assistant"
+//         },
+//         {
 //             role: 'user',
+//             dataId: randomId(),
 //             content: fsContent
 //         }
 //     ]
@@ -26,7 +34,7 @@ const needAddFile = require('./needAddFile.json');
 // }
 
 // const response = axios.post(url, postData, { headers: header }).then((res) => {
-//     console.log(res.data)
+//     // console.log(res.data)
 //     const { choices } = res.data
 //     const { message } = choices[0]
 //     console.log(message)
@@ -34,16 +42,20 @@ const needAddFile = require('./needAddFile.json');
 //     console.log(err)
 // })
 
-const url = 'http://localhost:3002/api/v1/chat/completions'
-const token = 'fastgpt-wp115NwJf38ytxxis4ELY7P9nuGFmxwt0Nh27uaDR0t2eMIwStzj'
-
 const transitionDoc = (content) => {
     const postData = {
         model: 'qwen2:7b',
-        chatId: '2',
+        chatId: 'kudm64gieTFH',
+        appId: '6680ba4c6ebed5735c5eb611',
         messages: [
             {
+                content: "",
+                dataId: randomId(),
+                role: "assistant"
+            },
+            {
                 role: 'user',
+                dataId: randomId(),
                 content: content
             }
         ]
@@ -107,10 +119,11 @@ async function main() {
                 console.log(`zh-CN: ${zhNodePath} is exist`);
                 continue
             }
-
+            console.log(`====================== 开始翻译 ${enNodePath} ======================`);
             const enNodeContent = fs.readFileSync(enNodePath, 'utf8');
             const docsTransContent = await transitionDoc(enNodeContent)
-
+            console.log('====================== 翻译结果 ======================')
+            console.log(docsTransContent)
             fs.writeFileSync(zhNodePath, docsTransContent, 'utf8');
             console.log(`zh-CN: ${zhNodePath} is created successfully`);
         }
