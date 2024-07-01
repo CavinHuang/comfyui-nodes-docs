@@ -114,6 +114,10 @@ const nodeGen = (nav) => {
           needAddFileContent[pluginName] = [];
         }
         needAddFileContent[pluginName].push(nodeName);
+        const fileContent = fs.readFileSync(enNodeDocPath, 'utf8');
+        if (!fs.existsSync(_cnNodeDocPath) && fileContent) {
+          fs.writeFileSync(_cnNodeDocPath, '');
+        }
       } else {
         fs.copyFileSync(_nodeDocPath, _cnNodeDocPath)
       }
@@ -122,6 +126,10 @@ const nodeGen = (nav) => {
         // zh-CN文件不存在
         if (!fs.existsSync(_cnNodeDocPath)) {
           needAddFileContent[pluginName].push(nodeName);
+          const fileContent = fs.readFileSync(enNodeDocPath, 'utf8');
+          if (!fs.existsSync(_cnNodeDocPath) && fileContent) {
+            fs.writeFileSync(_cnNodeDocPath, '');
+          }
         }
       }
       fs.copyFileSync(enNodeDocPath, _enNodeDocPath);
