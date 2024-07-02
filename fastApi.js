@@ -4,6 +4,8 @@ const path = require('path');
 
 const needAddFile = require('./needAddFile.json');
 
+const { sleep, getCompletion } = require('./fastApi2')
+
 const token = 'fastgpt-szpsv90SJftbX699P4lpDtvSNzH7GvwSoMJcMz8pAl3aEcPAxfh4GYFZlzTYvU7'
 const url = 'http://localhost:3002/api/v1/chat/completions'
 const randomId = () => Math.random().toString(36).substr(2, 10)
@@ -85,7 +87,7 @@ const windowsPathIgnore = [
     ['"', '%22'],
     ['?', '%3F']
   ]
-  
+
 const repairePath = (fileName) => {
 let name = fileName;
 windowsPathIgnore.forEach((item) => {
@@ -115,20 +117,69 @@ async function main() {
                 continue
             }
 
-            if (fs.existsSync(zhNodePath)) {
+            const znNodeContent = fs.readFileSync(zhNodePath, 'utf8');
+            if (fs.existsSync(zhNodePath) && znNodeContent) {
                 console.log(`zh-CN: ${zhNodePath} is exist`);
                 continue
             }
             console.log(`====================== 开始翻译 ${enNodePath} ======================`);
             const enNodeContent = fs.readFileSync(enNodePath, 'utf8');
-            const docsTransContent = await transitionDoc(enNodeContent)
+            const enNodeFileSize = fs.statSync(enNodePath).size;
+            // const file = {
+            //   file_nam: "paste.txt",
+            //   file_size: enNodeFileSize,
+            //   file_type: "txt",
+            //   extracted_content: enNodeContent
+            // }
+
+            const { newContent, sourceCodeContent } = spliteSourceCode(enNodeContent)
+            let docsTransContent = await getCompletion(newContent)
             console.log('====================== 翻译结果 ======================')
             console.log(docsTransContent)
-            fs.writeFileSync(zhNodePath, docsTransContent, 'utf8');
-            console.log(`zh-CN: ${zhNodePath} is created successfully`);
+
+            if(docsTransContent) {
+              docsTransContent = docsTransContent.replace(/```markdown/g, '').replace(/```/g, '')
+              docsTransContent = sourceCodeContent + '\n\n' + docsTransContent
+              fs.writeFileSync(zhNodePath, docsTransContent || '', 'utf8');
+              console.log(`zh-CN: ${zhNodePath} is created successfully`);
+            } else {
+              console.log(`zh-CN: ${zhNodePath} is created failed`);
+            }
+
+            await sleep(5000)
         }
 
     }
+}
+
+/**
+ *
+ * @param {string} content
+ * @returns
+ */
+const spliteSourceCode = (content) => {
+  const flagText = '## Usage tips'
+  const sourceCodeHeadIndex = content.indexOf(flagText)
+  if (sourceCodeHeadIndex === -1) {
+    return {
+      sourceCodeContent: '',
+      content,
+      newContent: content
+    }
+  }
+
+  const spliteIndex = sourceCodeHeadIndex + flagText.length
+
+  const newContent = content.slice(0, sourceCodeHeadIndex)
+
+  const sourceCodeContent = content.slice(sourceCodeHeadIndex, content.length)
+
+
+  return {
+    sourceCodeContent,
+    content,
+    newContent
+  }
 }
 
 main()
