@@ -207,13 +207,15 @@ async function main() {
 
             const { newContent, sourceCodeContent } = spliteSourceCode(enNodeContent)
             // let docsTransContent = await getCompletion(newContent)
+            console.log(newContent)
+            // return
             let docsTransContent = await transitionDoc2(newContent)
             console.log('====================== 翻译结果 ======================')
             console.log(docsTransContent)
 
             if(docsTransContent) {
               docsTransContent = docsTransContent.replace(/```markdown/g, '').replace(/```/g, '')
-              docsTransContent = sourceCodeContent + '\n\n' + docsTransContent
+              docsTransContent = docsTransContent + '\n\n' + sourceCodeContent
               fs.writeFileSync(zhNodePath, docsTransContent || '', 'utf8');
               console.log(`zh-CN: ${zhNodePath} is created successfully`);
             } else {
@@ -233,16 +235,18 @@ async function main() {
  */
 const spliteSourceCode = (content) => {
   const flagText = '## Usage tips'
-  const sourceCodeHeadIndex = content.indexOf(flagText)
+  const flagText2 = '## Source code'
+  let sourceCodeHeadIndex = content.indexOf(flagText)
   if (sourceCodeHeadIndex === -1) {
-    return {
-      sourceCodeContent: '',
-      content,
-      newContent: content
+    sourceCodeHeadIndex = content.indexOf(flagText2)
+    if (sourceCodeHeadIndex === -1) {
+      return {
+        sourceCodeContent: '',
+        content,
+        newContent: content
+      }
     }
   }
-
-  const spliteIndex = sourceCodeHeadIndex + flagText.length
 
   const newContent = content.slice(0, sourceCodeHeadIndex)
 
