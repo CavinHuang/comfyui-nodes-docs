@@ -44,6 +44,10 @@ const randomId = () => Math.random().toString(36).substr(2, 10)
 //     console.log(err)
 // })
 
+const url2 = 'https://api.chat-plus.net/v1/chat/completions'
+const model2 = 'claude-3-5-sonnet-20240620'
+const token2 = 'sk-qzV9ma6pvqgapUqDE247Dc12A3A8435e8bC98451C9D74791'
+
 const transitionDoc = (content) => {
     const postData = {
         model: 'qwen2:7b',
@@ -68,6 +72,75 @@ const transitionDoc = (content) => {
     }
 
     return axios.post(url, postData, { headers: header }).then((res) => {
+        const { choices } = res.data
+        const { message } = choices[0]
+        return message.content
+    }).catch((err) => {
+        console.log(err)
+    })
+}
+
+const prompts = fs.readFileSync(path.resolve(__dirname, './prompt.md'), 'utf8')
+const initModel2  = async () => {
+    const postData = {
+        model: model2,
+        chatId: '2001',
+        messages: [
+            {
+                role: 'user',
+                dataId: randomId(),
+                content: prompts
+            }
+        ],
+        stream: false
+    }
+
+    const header = {
+        'Authorization': `Bearer ${token2}`
+    }
+
+    return axios.post(url2, postData, { headers: header }).then((res) => {
+        const { choices, id } = res.data
+        const { message } = choices[0]
+        console.log(res.data)
+        return {
+            id,
+            message: message.content
+        }
+    }).catch((err) => {
+        console.log(err)
+    })
+
+}
+let isInit = false
+const transitionDoc2 = async (content) => {
+    let conversation_id = '2001'
+    // if (!isInit) {
+    //     const { id } = await initModel2()
+    //     isInit = true
+    //     conversation_id = id
+    // }
+    const postData = {
+        model: model2,
+        conversation_id,
+        messages: [
+            {
+                role: 'system',
+                content: prompts
+            },
+            {
+                role: 'user',
+                content: content
+            }
+        ],
+        stream: false
+    }
+
+    const header = {
+        'Authorization': `Bearer ${token2}`
+    }
+
+    return axios.post(url2, postData, { headers: header }).then((res) => {
         const { choices } = res.data
         const { message } = choices[0]
         return message.content
@@ -133,7 +206,8 @@ async function main() {
             // }
 
             const { newContent, sourceCodeContent } = spliteSourceCode(enNodeContent)
-            let docsTransContent = await getCompletion(newContent)
+            // let docsTransContent = await getCompletion(newContent)
+            let docsTransContent = await transitionDoc2(newContent)
             console.log('====================== 翻译结果 ======================')
             console.log(docsTransContent)
 
