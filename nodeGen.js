@@ -108,7 +108,7 @@ const nodeGen = (nav) => {
       const _cnNodeDocPath = path.join(cnPluginDocNodesDir, `${repairePath(nodeName)}.md`);
       console.log(_enNodeDocPath)
 
-      if (!fs.existsSync(_nodeDocPath)) {
+      if (!fs.existsSync(_nodeDocPath) && fs.existsSync(enNodeDocPath)) {
         // console.log('need add file:', nodeName);
         if (!needAddFileContent[pluginName]) {
           needAddFileContent[pluginName] = [];
@@ -119,20 +119,28 @@ const nodeGen = (nav) => {
           fs.writeFileSync(_cnNodeDocPath, '');
         }
       } else {
-        fs.copyFileSync(_nodeDocPath, _cnNodeDocPath)
+        if (fs.existsSync(_nodeDocPath)) {
+          fs.copyFileSync(_nodeDocPath, _cnNodeDocPath)
+        } else {
+          if (!needAddFileContent[pluginName]) {
+            needAddFileContent[pluginName] = [];
+          }
+          needAddFileContent[pluginName].push(nodeName);
+        }
       }
 
       if (!fs.existsSync(_enNodeDocPath)) {
         // zh-CN文件不存在
         if (!fs.existsSync(_cnNodeDocPath)) {
           needAddFileContent[pluginName].push(nodeName);
-          const fileContent = fs.readFileSync(enNodeDocPath, 'utf8');
-          if (!fs.existsSync(_cnNodeDocPath) && fileContent) {
+          // const fileContent = fs.readFileSync(enNodeDocPath, 'utf8');
+          if (!fs.existsSync(_cnNodeDocPath)) {
             fs.writeFileSync(_cnNodeDocPath, '');
           }
         }
+      } else {
+        fs.copyFileSync(enNodeDocPath, _enNodeDocPath);
       }
-      fs.copyFileSync(enNodeDocPath, _enNodeDocPath);
     }
   }
 

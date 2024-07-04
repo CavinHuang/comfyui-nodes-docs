@@ -1,0 +1,1 @@
+md/ComfyUI_LayerStyle/licenses.md
